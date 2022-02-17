@@ -1,0 +1,15 @@
+<hibernate-mapping>
+    <class name="hibernate.Actor" table="actor">
+        <id column="id" name="ID" type="java.lang.Long">
+            <generator class="sequence">
+				<param name = "sequence">actor_id_seq</param>
+            </generator>
+        </id>
+        <property column="first_name" name="firstName" type="java.lang.String"/>
+        <property column="second_name" name="secondName" type="java.lang.String"/>
+        <set name="films" table="film_actors" lazy="false" cascade="save-update">
+            <key column="actor_id"/>
+            <many-to-many column="film_id" class="hibernate.Film"/>
+        </set>
+    </class>
+</hibernate-mapping>

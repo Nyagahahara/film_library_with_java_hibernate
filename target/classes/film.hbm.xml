@@ -1,0 +1,20 @@
+<hibernate-mapping>
+    <class name="hibernate.Film" table="film">
+        <id column="id" name="ID" type="java.lang.Long">
+            <generator class="sequence">
+				<param name = "sequence">film_id_seq</param>
+            </generator>
+        </id>
+        <property column="name" name="name" type="java.lang.String"/>
+        <property column="rating" name="rating" type="java.lang.Double"/>
+        <property column="seen" name="seen" type="java.lang.Boolean"/>
+        <set name="actors" table="film_actors" lazy="false" cascade="save-update">
+            <key column="film_id"/>
+            <many-to-many column="actor_id" class="hibernate.Actor"/>
+        </set>
+        <set name="genres" table="film_genres" lazy="false" cascade="save-update">
+            <key column="film_id"/>
+            <many-to-many column="genre_id" class="hibernate.Genre"/>
+        </set>
+    </class>
+</hibernate-mapping>
